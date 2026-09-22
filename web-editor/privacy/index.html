@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — n'co studio Web Editor</title>
+<meta name="description" content="Privacy policy for the n'co studio Web Editor Chrome extension. No data collected, no remote servers, no account.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="Privacy Policy — n'co studio Web Editor">
+<meta property="og:description" content="No data collected, no remote servers, no account.">
+<meta property="og:url" content="https://nco.studio/web-editor/privacy">
+<style>
+  :root{
+    --bg:#0b0b0c; --surface:#131315; --line:#232327;
+    --fg:#ededf0; --muted:#8e8e98; --accent:#ff5c38;
+  }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#fbfbfa; --surface:#fff; --line:#e6e6e2; --fg:#111113; --muted:#6b6b73; }
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--fg);
+    font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+    font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--fg)}
+  a:hover{color:var(--accent)}
+  .wrap{max-width:46rem; margin:0 auto; padding:0 24px}
+  header{padding:40px 0; border-bottom:1px solid var(--line)}
+  .mark{font-weight:600; letter-spacing:-.02em; font-size:1rem; text-decoration:none}
+  .mark span{color:var(--accent)}
+  main{padding:56px 0 88px}
+  h1{font-size:clamp(1.9rem,4.5vw,2.6rem); line-height:1.1; letter-spacing:-.03em; font-weight:600; margin:0 0 12px}
+  .updated{color:var(--muted); font-size:.9rem; margin:0 0 40px}
+  h2{font-size:1.15rem; font-weight:600; letter-spacing:-.01em; margin:44px 0 12px}
+  p{margin:0 0 16px; color:var(--muted)}
+  p strong, li strong{color:var(--fg); font-weight:600}
+  ul{margin:0 0 16px; padding-left:20px; color:var(--muted)}
+  li{margin-bottom:8px}
+  code{
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:.88em;
+    background:var(--surface); border:1px solid var(--line); border-radius:5px; padding:1px 5px; color:var(--fg);
+  }
+  .summary{
+    background:var(--surface); border:1px solid var(--line); border-left:3px solid var(--accent);
+    border-radius:12px; padding:20px 24px; margin:0 0 8px;
+  }
+  .summary p{margin:0}
+  .table-scroll{overflow-x:auto; margin:0 0 16px}
+  table{border-collapse:collapse; width:100%; font-size:.94rem; min-width:34rem}
+  th,td{text-align:left; vertical-align:top; padding:12px 14px; border-bottom:1px solid var(--line); color:var(--muted)}
+  th{color:var(--fg); font-weight:600; font-size:.78rem; text-transform:uppercase; letter-spacing:.08em}
+  td:first-child{white-space:nowrap; color:var(--fg)}
+  footer{border-top:1px solid var(--line); padding:28px 0 56px; color:var(--muted); font-size:.85rem}
+  footer a{color:var(--muted); text-decoration:none; margin-right:20px}
+  footer a:hover{color:var(--fg)}
+  .foot-row{display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="mark" href="/">n<span>'</span>co studio</a></div></header>
+
+<main class="wrap">
+  <h1>Privacy Policy — Web Editor</h1>
+  <p class="updated">Last updated: 21 September 2026</p>
+
+  <h2>Summary</h2>
+  <div class="summary">
+    <p>n'co studio Web Editor is a developer tool. It collects no personal data, sends no data to any remote server, and requires no account.</p>
+  </div>
+
+  <h2>What the extension does</h2>
+  <p>n'co studio Web Editor is a Chrome extension that overlays a visual editing interface on web pages running on your own machine (development servers at <code>localhost</code> or <code>127.0.0.1</code>). It lets developers select page elements, adjust their visual properties, and send the resulting changes to Claude Code through an MCP server that also runs on their machine.</p>
+
+  <h2>Data collection</h2>
+  <p><strong>None.</strong> The extension does not collect, store, or transmit any personal information, browsing history, page content, or usage analytics to anyone.</p>
+
+  <h2>Network activity</h2>
+  <p>All network communication stays on your machine:</p>
+  <ul>
+    <li>The extension opens a WebSocket connection to <code>ws://localhost</code> on a port between 7890 and 7899. That is the <code>@nco-studio/web-editor-mcp</code> server you install and run yourself.</li>
+    <li>No data is sent to n'co studio, cloud services, analytics providers, or any other remote endpoint.</li>
+    <li>The extension runs only on <code>http://localhost/*</code>, <code>http://127.0.0.1/*</code>, and <code>https://localhost/*</code>. It does not run on public websites.</li>
+  </ul>
+
+  <h2>The local MCP server</h2>
+  <p>The extension works with a companion server, <code>@nco-studio/web-editor-mcp</code>, which you run locally with <code>npx</code>. This server:</p>
+  <ul>
+    <li>Runs entirely on your machine.</li>
+    <li>May read your project's configuration files (for example <code>tailwind.config.ts</code> or <code>package.json</code>) to find design tokens and components. This happens locally; no project data leaves your machine.</li>
+    <li>Does not connect to any remote service.</li>
+  </ul>
+
+  <h2>Permissions</h2>
+  <div class="table-scroll">
+  <table>
+    <thead><tr><th>Permission</th><th>Why it's needed</th></tr></thead>
+    <tbody>
+      <tr><td><code>activeTab</code></td><td>To read the current tab's address and page structure so you can select elements, and to capture the visible tab when you use the screenshot tool. Screenshots are saved to your machine only.</td></tr>
+      <tr><td><code>storage</code></td><td>To keep your queue of pending changes across page reloads, using session storage that Chrome clears when it closes.</td></tr>
+      <tr><td><code>scripting</code></td><td>To load the editing overlay into your local development page when you turn the extension on.</td></tr>
+      <tr><td><code>localhost</code> / <code>127.0.0.1</code> access</td><td>To limit the extension to local development servers. It never runs on production or public websites.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>Data sharing</h2>
+  <p>No data is shared with any third party. The extension contains no analytics, advertising, or tracking.</p>
+
+  <h2>Children's privacy</h2>
+  <p>This extension is a tool for software developers. It is not directed at children and does not knowingly collect information from anyone, including minors.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>If this policy changes in a material way, the updated version will be published on this page and the "Last updated" date above will change.</p>
+
+  <h2>Contact</h2>
+  <p>Questions about this policy: <a href="https://github.com/n-co-studio/web-editor">github.com/n-co-studio/web-editor</a> or email <a href="mailto:hello@markpreston.co">hello@markpreston.co</a>.</p>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <nav><a href="/">n'co studio</a><a href="https://github.com/n-co-studio/web-editor">GitHub</a></nav>
+    <span>© 2026 n'co studio</span>
+  </div>
+</footer>
+</body>
+</html>
