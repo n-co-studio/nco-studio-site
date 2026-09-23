@@ -2,102 +2,112 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>n'co studio</title>
-<meta name="description" content="n'co studio — design systems and developer tools, built by hand.">
+<meta name="description" content="Design and technology practice by Mark Preston.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="n'co studio">
-<meta property="og:description" content="Design systems and developer tools, built by hand.">
+<meta property="og:description" content="Design and technology practice by Mark Preston.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nco.studio/">
+<link rel="preconnect" href="https://use.typekit.net">
+<link rel="preconnect" href="https://p.typekit.net" crossorigin>
+<link rel="stylesheet" href="https://use.typekit.net/ivy7roo.css">
 <style>
   :root{
-    --bg:#0b0b0c; --surface:#131315; --line:#232327;
-    --fg:#ededf0; --muted:#8e8e98; --accent:#ff5c38;
-    --max:64rem;
-  }
-  @media (prefers-color-scheme: light){
-    :root{ --bg:#fbfbfa; --surface:#fff; --line:#e6e6e2; --fg:#111113; --muted:#6b6b73; }
+    color-scheme:dark;
+    --fg:#fff; --muted:rgba(255,255,255,.58); --rule:rgba(255,255,255,.28);
+    --edge:32px;  /* minimum offset from every viewport edge */
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
   body{
-    margin:0; background:var(--bg); color:var(--fg);
-    font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
-    font-size:17px; line-height:1.6; -webkit-font-smoothing:antialiased;
+    margin:0; min-height:100svh; background:#000; color:var(--fg);
+    font-family:"hero-new",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-weight:300; -webkit-font-smoothing:antialiased;
+    /* One centred column: masthead, then the published work list beneath it. */
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:calc(var(--edge) + env(safe-area-inset-top, 0px)) var(--edge)
+            calc(var(--edge) + env(safe-area-inset-bottom, 0px));
+    gap:56px;
   }
-  a{color:inherit}
-  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px}
-  header{padding:40px 0}
-  .mark{font-weight:600; letter-spacing:-.02em; font-size:1rem}
-  .mark span{color:var(--accent)}
-  main{padding:56px 0 96px}
-  h1{
-    font-size:clamp(2.6rem,7vw,5rem); line-height:1.02; letter-spacing:-.045em;
-    font-weight:600; margin:0 0 24px;
+  /* Decorative — never intercept clicks or the page's own cursor tracking. */
+  #lava{position:fixed; inset:0; z-index:0; pointer-events:none}
+  #lava .lava{position:absolute; inset:0; width:100%; height:100%; display:block}
+
+  .masthead{position:relative; z-index:1; width:100%; max-width:17rem; text-align:center}
+  .logo{display:block; width:100%; height:auto; color:var(--fg)}
+  .tagline{
+    margin:20px 0 0; font-size:clamp(.95rem,2.2vw,1.125rem);
+    font-weight:300; letter-spacing:.01em; color:var(--muted);
   }
-  .lede{font-size:clamp(1.05rem,2.2vw,1.35rem); color:var(--muted); max-width:34ch; margin:0 0 48px}
-  .rule{height:1px; background:var(--line); border:0; margin:64px 0}
-  h2{font-size:.78rem; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); font-weight:600; margin:0 0 24px}
-  .prose{max-width:60ch; color:var(--muted)}
-  .prose strong{color:var(--fg); font-weight:500}
-  .cards{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-  .card{
-    display:block; padding:24px; border:1px solid var(--line); border-radius:14px;
-    background:var(--surface); text-decoration:none; transition:border-color .18s ease, transform .18s ease;
+
+  .published{position:relative; z-index:1; text-align:center}
+  .published h2{
+    margin:0 0 10px; font-size:.75rem; font-weight:400;
+    text-transform:uppercase; letter-spacing:.14em; color:var(--muted);
   }
-  .card:hover{border-color:var(--accent); transform:translateY(-2px)}
-  .card h3{margin:0 0 8px; font-size:1.05rem; font-weight:600; letter-spacing:-.01em}
-  .card p{margin:0; color:var(--muted); font-size:.95rem}
-  .card .tag{display:inline-block; margin-top:14px; font-size:.75rem; letter-spacing:.06em; text-transform:uppercase; color:var(--accent)}
-  .contact a{color:var(--fg); text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:2px}
-  .contact a:hover{border-color:var(--accent)}
-  footer{border-top:1px solid var(--line); padding:28px 0 56px; color:var(--muted); font-size:.85rem}
-  footer nav a{margin-right:20px; text-decoration:none; color:var(--muted)}
-  footer nav a:hover{color:var(--fg)}
-  .foot-row{display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between; align-items:center}
+  .published ul{margin:0; padding:0; list-style:none}
+  .published li + li{margin-top:6px}
+  .published a{
+    font-size:clamp(.95rem,2.2vw,1.125rem); color:var(--fg); text-decoration:none;
+    border-bottom:1px solid var(--rule); padding-bottom:1px;
+    transition:border-color .18s ease;
+  }
+
+  /* Shared treatment for the links that disperse the background on hover. */
+  .tagline a{
+    color:var(--fg); text-decoration:none;
+    border-bottom:1px solid var(--rule); padding-bottom:1px;
+    transition:border-color .18s ease;
+  }
+  .tagline a:hover, .published a:hover{border-bottom-color:var(--fg)}
+
+  /* Diagonal up-right arrow revealed to the right of a link on hover. It sits
+     OUTSIDE the <a> so the underline stays the width of the text, and its box
+     is always reserved (only opacity/transform animate) so nothing shifts. */
+  .lk{white-space:nowrap}
+  .lk .arrow{
+    display:inline-block; width:.62em; height:.62em; margin-left:.32em;
+    /* Explicitly --fg, not currentColor: the tagline arrow would otherwise
+       inherit the muted grey of its sentence while the list arrow sits white. */
+    background:var(--fg);
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3.2,8.8L8.8,3.2M4.6,3.2H8.8V7.4' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain;
+    mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3.2,8.8L8.8,3.2M4.6,3.2H8.8V7.4' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain;
+    opacity:0; transform:translate(-.16em,.16em);
+    transition:opacity .18s ease, transform .18s ease;
+  }
+  .lk:hover .arrow, .lk:focus-within .arrow{opacity:1; transform:translate(0,0)}
 </style>
 </head>
 <body>
-<header><div class="wrap"><div class="mark">n<span>'</span>co studio</div></div></header>
+  <div id="lava" aria-hidden="true"></div>
 
-<main class="wrap">
-  <h1>Design systems<br>and the tools<br>that build them.</h1>
-  <p class="lede">A one-person studio working where product design meets AI-assisted software development.</p>
+  <header class="masthead">
+    <svg class="logo" width="690.505" height="121.67" viewBox="0 0 690.505 121.67" role="img" aria-label="n'co studio">
+      <g fill="currentColor">
+    <path d="M83.366,102.496c-9.796,12.922-19.382,19.174-24.593,19.174-5.627,0-7.086-5.835-3.126-21.883,3.96-16.466,6.46-27.512,10.004-42.309,2.709-13.13,2.709-17.924-2.918-17.924-8.545,0-25.426,15.839-36.889,35.639-3.752,6.669-5.419,11.463-7.087,17.924-1.667,6.67-3.751,16.882-5.627,25.01-4.586.834-8.337,2.084-11.88,3.334l-1.25-1.042c5.627-23.343,11.463-46.685,16.465-70.028,1.667-7.503.834-9.171-.834-9.171-1.876,0-5.836,2.292-12.505,8.962l-1.667-2.292c9.796-12.713,19.591-18.341,23.968-18.341,5.835,0,6.044,7.503,1.042,27.928l-3.544,14.797c14.382-22.3,35.639-42.725,48.978-42.725,7.712,0,11.463,4.586,4.793,32.305-3.543,14.172-6.044,26.261-9.17,39.182-1.25,6.877-.834,9.587,1.042,9.587,2.918,0,7.503-3.96,13.339-10.629l1.459,2.501h0Z"/>
+    <path d="M126.785,0c-4.001,14.614-11.481,33.228-16.352,41.231l-9.743,1.218c3.827-10.264,8.351-28.357,10.265-40.882l15.83-1.566Z"/>
+    <path d="M187.836,101.037c-8.754,11.254-21.676,20.633-32.93,20.633-23.967,0-38.766-20.008-38.766-40.85,0-15.631,5.836-28.761,20.217-40.016,9.796-7.503,21.884-11.255,28.553-11.255,8.129,0,14.589,2.292,18.133,5.419,1.667,1.459,2.292,2.918,2.292,4.585,0,3.543-3.961,8.129-6.045,8.129-.834,0-1.459-.417-3.543-2.293-5.002-4.376-12.088-7.294-20.217-7.294-14.381,0-26.051,8.545-26.261,32.721-.208,29.596,20.425,39.391,31.68,39.391,9.171,0,16.048-2.292,25.01-11.255l1.876,2.085h0Z"/>
+    <path d="M239.916,29.549c24.802,0,42.1,20.009,42.1,44.393,0,31.471-22.718,47.727-42.309,47.727-26.052,0-42.725-21.883-42.725-44.393,0-32.722,25.634-47.728,42.934-47.728h0ZM237.415,33.927c-14.59,0-24.593,15.631-24.593,36.889,0,27.928,12.505,46.061,29.595,46.061,13.13,0,23.76-9.796,23.76-39.182,0-22.509-9.796-43.767-28.761-43.767h0Z"/>
+    <path d="M359.751,48.747v4.016c-6.23-4.431-12.876-6.785-20.215-6.785-11.354,0-19.522,6.092-19.522,14.954,0,9.277,8.169,12.461,20.215,16.615,12.6,4.154,22.984,8.308,22.984,20.354,0,11.63-9.831,19.8-23.953,19.8-8.308,0-17.03-2.908-24.507-8.723v-4.292c7.062,6.092,15.785,9.553,24.507,9.553,12.046,0,20.354-6.784,20.354-16.199,0-9.831-8.584-13.569-21.046-17.584-11.769-3.877-22.153-7.892-22.153-19.246,0-10.8,9.831-18.692,23.261-18.692,7.2,0,13.984,2.077,20.076,6.23Z"/>
+    <path d="M389.1,43.624h22.015v3.323h-22.015v47.907c0,14.261,7.753,19.246,18.415,19.246,2.077,0,3.876-.139,5.954-.554v3.185c-1.108.277-3.6.692-6.369.692-12.461,0-21.6-6.507-21.6-22.292v-48.184h-11.215v-3.323h11.354v-17.308h3.461v17.308Z"/>
+    <path d="M427.588,90.561v-46.937h3.6v47.076c0,14.954,8.861,23.538,22.984,23.538,14.262,0,23.123-8.584,23.123-23.538v-47.076h3.6v46.937c0,16.753-10.522,27.138-26.723,27.138s-26.584-10.385-26.584-27.138Z"/>
+    <path d="M501.796,80.177c0-23.399,15.923-37.661,33.092-37.661,12.6,0,25.061,7.615,29.769,22.153h.138V6.794h3.601v109.797h-2.908l-.415-21.6h-.139c-4.846,15.092-17.308,22.708-29.907,22.708-17.307,0-33.229-14.4-33.229-37.522ZM535.164,114.238c15.646,0,29.769-12.876,29.769-34.199,0-21.184-13.984-34.061-29.769-34.061s-29.769,12.876-29.769,34.199c0,21.046,14.123,34.061,29.769,34.061Z"/>
+    <path d="M597.741,12.748c1.938,0,3.461,1.523,3.461,3.461s-1.522,3.323-3.461,3.323c-2.077,0-3.462-1.385-3.462-3.323s1.385-3.461,3.462-3.461ZM595.803,43.624h3.6v72.967h-3.6V43.624Z"/>
+    <path d="M621.691,80.177c0-22.846,16.2-37.661,34.477-37.661,18.138,0,34.337,14.815,34.337,37.661,0,22.707-16.338,37.522-34.337,37.522-18.139,0-34.477-14.677-34.477-37.522ZM656.168,114.238c15.646,0,30.737-12.6,30.737-34.061s-15.092-34.199-30.737-34.199c-15.784,0-30.877,12.738-30.877,34.199s15.093,34.061,30.877,34.061Z"/>
+  </g>
+    </svg>
+    <p class="tagline">Design and technology practice by <span class="lk"><a href="https://markpreston.co" target="_blank" rel="noopener noreferrer" data-lava-scatter>Mark Preston</a><i class="arrow" aria-hidden="true"></i></span>.</p>
+  </header>
 
-  <hr class="rule">
+  <section class="published">
+    <h2>Published work</h2>
+    <ul>
+      <li><span class="lk"><a href="/web-editor/" target="_blank" rel="noopener" data-lava-scatter>n'co studio Web Editor</a><i class="arrow" aria-hidden="true"></i></span></li>
+    </ul>
+  </section>
 
-  <h2>What this is</h2>
-  <div class="prose">
-    <p>n'co studio is where I build the things I wanted to exist: <strong>design systems</strong> that hold up under real use, and <strong>developer tools</strong> that close the gap between a design decision and the code that ships it.</p>
-    <p>Most of the work is practical — systems, interfaces, and small sharp tools for people who build software with AI in the loop.</p>
-  </div>
-
-  <hr class="rule">
-
-  <h2>Tools</h2>
-  <div class="cards">
-    <a class="card" href="https://github.com/n-co-studio/web-editor">
-      <h3>Web Editor</h3>
-      <p>A Chrome extension that overlays visual editing on your local dev server and sends changes straight to Claude Code.</p>
-      <span class="tag">Chrome extension →</span>
-    </a>
-  </div>
-
-  <hr class="rule">
-
-  <h2>Contact</h2>
-  <p class="contact"><a href="mailto:hello@markpreston.co">hello@markpreston.co</a></p>
-</main>
-
-<footer>
-  <div class="wrap foot-row">
-    <nav>
-      <a href="/web-editor/privacy">Web Editor privacy</a>
-      <a href="https://github.com/n-co-studio">GitHub</a>
-    </nav>
-    <span>© 2026 n'co studio</span>
-  </div>
-</footer>
+  <script src="/assets/lava.js" defer></script>
 </body>
 </html>

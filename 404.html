@@ -5,15 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Not found — n'co studio</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://use.typekit.net">
+<link rel="preconnect" href="https://p.typekit.net" crossorigin>
+<link rel="stylesheet" href="https://use.typekit.net/ivy7roo.css">
 <style>
-  :root{--bg:#0b0b0c;--fg:#ededf0;--muted:#8e8e98;--accent:#ff5c38}
-  @media (prefers-color-scheme: light){:root{--bg:#fbfbfa;--fg:#111113;--muted:#6b6b73}}
-  body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--fg);
-    font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;text-align:center;padding:24px}
-  h1{font-size:3rem;letter-spacing:-.04em;margin:0 0 8px;font-weight:600}
+  :root{color-scheme:light; --fg:#111113; --muted:#6b6b73; --accent:#ff5c38}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100svh;display:grid;place-items:center;background:#fff;color:var(--fg);
+    font-family:"hero-new",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-weight:300;text-align:center;padding:48px 24px;-webkit-font-smoothing:antialiased}
+  .stage{width:100%;max-width:22rem}
+  .logo{display:block;width:100%;height:auto;margin:0 auto 36px}
+  h1{font-size:2.5rem;letter-spacing:-.03em;margin:0 0 8px;font-weight:400}
   p{color:var(--muted);margin:0 0 24px}
-  a{color:var(--accent)}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
 </style>
 </head>
-<body><div><h1>404</h1><p>That page doesn't exist.</p><a href="/">Back to n'co studio</a></div></body>
+<body>
+  <main class="stage">
+    <img class="logo" src="/assets/logo.svg" width="690" height="122" alt="n'co studio">
+    <h1>404</h1>
+    <p>That page doesn't exist.</p>
+    <a href="/">Back to n'co studio</a>
+  </main>
+</body>
 </html>

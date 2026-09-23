@@ -9,33 +9,37 @@
 <meta property="og:title" content="Privacy Policy — n'co studio Web Editor">
 <meta property="og:description" content="No data collected, no remote servers, no account.">
 <meta property="og:url" content="https://nco.studio/web-editor/privacy">
+<link rel="preconnect" href="https://use.typekit.net">
+<link rel="preconnect" href="https://p.typekit.net" crossorigin>
+<link rel="stylesheet" href="https://use.typekit.net/ivy7roo.css">
 <style>
   :root{
-    --bg:#0b0b0c; --surface:#131315; --line:#232327;
-    --fg:#ededf0; --muted:#8e8e98; --accent:#ff5c38;
-  }
-  @media (prefers-color-scheme: light){
-    :root{ --bg:#fbfbfa; --surface:#fff; --line:#e6e6e2; --fg:#111113; --muted:#6b6b73; }
+    color-scheme:light;
+    --bg:#fff; --surface:#fafaf9; --line:#e6e6e2;
+    --fg:#111113; --muted:#6b6b73; --accent:#ff5c38;
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
   body{
     margin:0; background:var(--bg); color:var(--fg);
-    font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
-    font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased;
+    font-family:"hero-new",ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+    font-weight:300; font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased;
   }
   a{color:var(--fg)}
   a:hover{color:var(--accent)}
   .wrap{max-width:46rem; margin:0 auto; padding:0 24px}
   header{padding:40px 0; border-bottom:1px solid var(--line)}
-  .mark{font-weight:600; letter-spacing:-.02em; font-size:1rem; text-decoration:none}
-  .mark span{color:var(--accent)}
-  main{padding:56px 0 88px}
-  h1{font-size:clamp(1.9rem,4.5vw,2.6rem); line-height:1.1; letter-spacing:-.03em; font-weight:600; margin:0 0 12px}
+  .mark{display:inline-block; line-height:0}
+  .mark img{display:block; width:auto; height:22px}
+  /* main.wrap, not main: the element also carries .wrap, whose `padding`
+     shorthand outranks a bare element selector and was resetting this to 0.
+     Longhands here so .wrap keeps supplying the 24px side gutter. */
+  main.wrap{padding-top:40px; padding-bottom:88px}
+  h1{font-size:clamp(1.9rem,4.5vw,2.6rem); line-height:1.1; letter-spacing:-.03em; font-weight:400; margin:0 0 12px}
   .updated{color:var(--muted); font-size:.9rem; margin:0 0 40px}
-  h2{font-size:1.15rem; font-weight:600; letter-spacing:-.01em; margin:44px 0 12px}
+  h2{font-size:1.15rem; font-weight:500; letter-spacing:-.01em; margin:44px 0 12px}
   p{margin:0 0 16px; color:var(--muted)}
-  p strong, li strong{color:var(--fg); font-weight:600}
+  p strong, li strong{color:var(--fg); font-weight:500}
   ul{margin:0 0 16px; padding-left:20px; color:var(--muted)}
   li{margin-bottom:8px}
   code{
@@ -50,7 +54,7 @@
   .table-scroll{overflow-x:auto; margin:0 0 16px}
   table{border-collapse:collapse; width:100%; font-size:.94rem; min-width:34rem}
   th,td{text-align:left; vertical-align:top; padding:12px 14px; border-bottom:1px solid var(--line); color:var(--muted)}
-  th{color:var(--fg); font-weight:600; font-size:.78rem; text-transform:uppercase; letter-spacing:.08em}
+  th{color:var(--fg); font-weight:500; font-size:.78rem; text-transform:uppercase; letter-spacing:.08em}
   td:first-child{white-space:nowrap; color:var(--fg)}
   footer{border-top:1px solid var(--line); padding:28px 0 56px; color:var(--muted); font-size:.85rem}
   footer a{color:var(--muted); text-decoration:none; margin-right:20px}
@@ -59,7 +63,7 @@
 </style>
 </head>
 <body>
-<header><div class="wrap"><a class="mark" href="/">n<span>'</span>co studio</a></div></header>
+<header><div class="wrap"><a class="mark" href="/" aria-label="n'co studio"><img src="/assets/logo.svg" width="690" height="122" alt="n'co studio"></a></div></header>
 
 <main class="wrap">
   <h1>Privacy Policy — Web Editor</h1>
@@ -115,7 +119,7 @@
   <p>If this policy changes in a material way, the updated version will be published on this page and the "Last updated" date above will change.</p>
 
   <h2>Contact</h2>
-  <p>Questions about this policy: <a href="https://github.com/n-co-studio/web-editor">github.com/n-co-studio/web-editor</a> or email <a href="mailto:hello@markpreston.co">hello@markpreston.co</a>.</p>
+  <p>Questions about this policy: <a href="https://github.com/n-co-studio/web-editor">github.com/n-co-studio/web-editor</a> or email <a href="mailto:hello@nco.studio">hello@nco.studio</a>.</p>
 </main>
 
 <footer>
