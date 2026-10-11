@@ -67,18 +67,18 @@
 
 <main class="wrap">
   <h1>Privacy Policy — Web Editor</h1>
-  <p class="updated">Last updated: 21 September 2026</p>
+  <p class="updated">Last updated: 11 October 2026</p>
 
   <h2>Summary</h2>
   <div class="summary">
-    <p>n'co studio Web Editor is a developer tool. It collects no personal data, sends no data to any remote server, and requires no account.</p>
+    <p>n'co studio Web Editor is a developer tool. It collects no personal data, requires no account, and sends no data to n'co studio or any other remote server. It does hand the changes you make to your own AI coding agent, which is the one thing worth reading about below — see <a href="#agent">What your agent sees</a>.</p>
   </div>
 
   <h2>What the extension does</h2>
   <p>n'co studio Web Editor is a Chrome extension that overlays a visual editing interface on web pages running on your own machine (development servers at <code>localhost</code> or <code>127.0.0.1</code>). It lets developers select page elements, adjust their visual properties, and send the resulting changes to Claude Code through an MCP server that also runs on their machine.</p>
 
   <h2>Data collection</h2>
-  <p><strong>None.</strong> The extension does not collect, store, or transmit any personal information, browsing history, page content, or usage analytics to anyone.</p>
+  <p><strong>None of its own.</strong> The extension collects no personal information, no browsing history and no usage analytics, and it transmits nothing to n'co studio or any third-party service. It does send the changes you make — which include content from the page you are editing — to the MCP server on your own machine, which hands them to your AI coding agent. That path is described in <a href="#agent">What your agent sees</a>.</p>
 
   <h2>Network activity</h2>
   <p>All network communication stays on your machine:</p>
@@ -88,11 +88,32 @@
     <li>The extension runs only on <code>http://localhost/*</code>, <code>http://127.0.0.1/*</code>, and <code>https://localhost/*</code>. It does not run on public websites.</li>
   </ul>
 
+  <h2 id="agent">What your agent sees</h2>
+  <p>The extension sends your data nowhere. Your <strong>agent</strong> is a separate matter, and worth being deliberate about.</p>
+  <p>Each change you send carries the following to the MCP server on your machine:</p>
+  <ul>
+    <li><strong>The page's full address</strong>, with every change &mdash; including any account id, order number or token in its path or query string.</li>
+    <li><strong>The element you edited</strong>: its tag, a CSS selector for it, its text, and <em>all</em> of its attributes &mdash; so a <code>data-customer-id</code> or a personalised <code>aria-label</code> travels too, even for a purely cosmetic change.</li>
+    <li><strong>The before and after values</strong> of the properties you changed.</li>
+    <li><strong>A second element, in full</strong>, when a change needs one &mdash; some edits have to touch a parent or sibling to work. It travels with the same detail as the element you edited.</li>
+    <li><strong>Any notes you typed</strong>, word for word, along with the tag, selector and text of every element you attached them to.</li>
+    <li><strong>The source file and line</strong> each element maps to, where the dev plugin supplied them, the served path of any image on it, the element's position and size, and an opaque per-tab id.</li>
+    <li><strong>Where the property came from</strong> &mdash; the stylesheet that owns it, the selector, its specificity, and any media query around it. Not only the rule in force: rules for <em>other</em> breakpoints are read and sent too.</li>
+    <li><strong>The viewport size</strong> and the breakpoint you were working at.</li>
+    <li><strong>The element's full inner HTML</strong>, but only when you insert, duplicate or paste an element, or make a formatted-text edit. An ordinary spacing or colour change sends no markup.</li>
+    <li><strong>Neighbouring and container elements</strong> for reorder, insert, group and reparent edits &mdash; which can be several elements you did not touch directly.</li>
+    <li><strong>A component's name and import path</strong>, when you insert one of your project's own components.</li>
+    <li><strong>CSS the tool generated for you</strong>, such as the rules written by the parallax editor.</li>
+  </ul>
+  <p>Screenshots are the exception: they are stitched and saved in your browser, and never go to the MCP server.</p>
+  <p>The MCP server runs on your machine, but your agent is the next step, and most agents send what they read to a model provider. Claude Code, for example, is a local program whose model calls go to Anthropic's API &mdash; so content you edit reaches Anthropic the same way any file you ask it to read does.</p>
+  <p>Practically: a development server is not automatically harmless. Local environments are often pointed at a seeded database, a staging copy or a production dump, so the page you are editing may hold real customer records. Treat editing a page the way you would treat pasting that page into a chat with your agent &mdash; because in substance that is what it is.</p>
+
   <h2>The local MCP server</h2>
   <p>The extension works with a companion server, <code>@nco-studio/web-editor-mcp</code>, which you run locally with <code>npx</code>. This server:</p>
   <ul>
     <li>Runs entirely on your machine.</li>
-    <li>May read your project's configuration files (for example <code>tailwind.config.ts</code> or <code>package.json</code>) to find design tokens and components. This happens locally; no project data leaves your machine.</li>
+    <li>May read your project's configuration files (for example <code>tailwind.config.ts</code> or <code>package.json</code>) to find design tokens and components. Compiling and evaluating them happens entirely on your machine, and the server sends nothing anywhere. What your agent then reads from the server is described below.</li>
     <li>Does not connect to any remote service.</li>
   </ul>
 
@@ -110,7 +131,8 @@
   </div>
 
   <h2>Data sharing</h2>
-  <p>No data is shared with any third party. The extension contains no analytics, advertising, or tracking.</p>
+  <p>This extension shares no data with any third party. It contains no analytics, advertising or tracking, and transmits nothing beyond the localhost connection described above.</p>
+  <p>The one onward path is the one you create: the MCP server exists to hand your changes to your own AI coding agent, and most agents send what they read to their model provider. That provider is your agent's, chosen by you, under your agreement with them &mdash; this extension has no relationship with it and sends it nothing directly.</p>
 
   <h2>Children's privacy</h2>
   <p>This extension is a tool for software developers. It is not directed at children and does not knowingly collect information from anyone, including minors.</p>
